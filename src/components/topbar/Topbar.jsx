@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav, Button } from 'react-bootstrap'
 import { Context } from '../../store/appContext'
 import './topbar.css'
 
@@ -33,79 +33,22 @@ export const Topbar = () => {
             <div className="ml-auto">
               {!store.token ? (
                 <Link to="/login">
-                  <button className="btn btn-primary">Log in</button>
+                  <Button variant="outline-primary">Log in</Button>
                 </Link>
               ) : (
-                <button
+                <Button
+                  variant="outline-primary"
                   onClick={() => {
                     actions.logout()
                   }}
-                  className="btn btn-primary"
                 >
                   Log out
-                </button>
+                </Button>
               )}
             </div>
           </Navbar>
         </Container>
       </Navbar>
     </>
-
-    // <div className="topbar">
-    //   <div className="topbarWrapper">
-    //     <div className="topLeft">
-    //       <Link to="/" className="link">
-    //         <span className="home">Homepage</span>
-    //       </Link>
-    //     </div>
-
-    //     <div className="topMiddle">
-    //       <Link to="/" className="link">
-    //         <span className="home">Homepage</span>
-    //       </Link>
-    //     </div>
-
-    //     <div className="topRight">
-    //       <div className="ml-auto">
-    //         {!store.token ? (
-    //           <Link to="/login">
-    //             <button className="btn btn-primary">Log in</button>
-    //           </Link>
-    //         ) : (
-    //           <button
-    //             onClick={() => {
-    //               actions.logout()
-    //             }}
-    //             className="btn btn-primary"
-    //           >
-    //             Log out
-    //           </button>
-    //         )}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <nav className="navbar navbar-light bg-light mb-3">
-    //   <Link to="/">
-    //     <span className="navbar-brand mb-0 h1">Homepage</span>
-    //   </Link>
-    //   <div className="ml-auto">
-    //     {!store.token ? (
-    //       <Link to="/login">
-    //         <button className="btn btn-primary">Log in</button>
-    //       </Link>
-    //     ) : (
-    //       <button
-    //         onClick={() => {
-    //           actions.logout()
-    //         }}
-    //         className="btn btn-primary"
-    //       >
-    //         Log out
-    //       </button>
-    //     )}
-    //   </div>
-    // </nav>
   )
 }

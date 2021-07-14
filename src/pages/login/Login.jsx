@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router'
 import { Context } from '../../store/appContext'
+import './login.css'
 
 export default function Login() {
   const { store, actions } = useContext(Context)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
-
-  // const token = sessionStorage.getItem('token')
 
   const handleClick = () => {
     actions.login(username, password).then(() => {
@@ -20,31 +19,15 @@ export default function Login() {
     history.push('/')
   }
 
-  // const handleClick = () => {
-  //   const headers = new Headers()
-  //   headers.set(
-  //     'Authorization',
-  //     'Basic ' + Buffer.from(username + ':' + password).toString('base64')
-  //   )
-
-  //   fetch('/login', {
-  //     method: 'GET',
-  //     headers: headers,
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => sessionStorage.setItem('token', data.token))
-  //     .catch(error => console.error(error))
-  // }
-
   return (
-    <div className="login-form">
+    <div className="loginPage">
       {store.token && store.token !== '' && store.token !== undefined ? (
         // 'you are logged in with token:' + token
         history.push('/')
       ) : (
-        <div>
-          <h2>Login</h2>
-          <div className="form-group">
+        <div className="form">
+          <h2 className="formTitle">Sign In</h2>
+          <div className="formItem">
             <label htmlFor="name">Username:</label>
             <input
               type="text"
@@ -54,7 +37,7 @@ export default function Login() {
               }}
             />
           </div>
-          <div className="form-group">
+          <div className="formItem">
             <label htmlFor="password">Password:</label>
             <input
               type="password"
@@ -64,7 +47,9 @@ export default function Login() {
               }}
             />
           </div>
-          <button onClick={handleClick}>Login</button>
+          <button className="submitButton" onClick={handleClick}>
+            Login
+          </button>
         </div>
       )}
     </div>

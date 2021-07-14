@@ -11,11 +11,7 @@ export default function Home() {
     <div>
       <button onClick={() => actions.getMetrics()}>Retreive Data</button>
 
-      <div>
-        {store.data ? <pre>{JSON.stringify(store.data, null, 2)}</pre> : null}
-
-        {/* <pre>{JSON.stringify(store.data, null, 2)}</pre> */}
-      </div>
+      <div>{store.data ? <pre>{JSON.stringify(store.data, null, 2)}</pre> : null}</div>
     </div>
   )
 }

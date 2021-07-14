@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Topbar } from './components/topbar/Topbar'
 import './app.css'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import injectContext from './store/appContext'
-import { Topbar } from './components/topbar/Topbar'
 import Charts from './pages/charts/Charts'
 import Overview from './pages/overview/Overview'
 function App() {
