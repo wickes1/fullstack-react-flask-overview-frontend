@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: '',
+      username: '',
       message: null,
       data: null,
       demo: [
@@ -29,8 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       logout: () => {
         sessionStorage.removeItem('token')
-        console.log('Log out')
         setStore({ token: null })
+        console.log('Logged out')
       },
 
       login: async (username, password) => {
@@ -53,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await res.json()
           sessionStorage.setItem('token', data.token)
           console.log('User logged in:', data.token)
-          setStore({ token: data.token })
+          setStore({ token: data.token, username: username })
           return true
         } catch (error) {
           console.error('Login Error')

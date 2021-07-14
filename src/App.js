@@ -1,20 +1,27 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Navbar } from './components/navbar/Navbar'
 import './app.css'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import injectContext from './store/appContext'
-
+import { Topbar } from './components/topbar/Topbar'
+import Charts from './pages/charts/Charts'
+import Overview from './pages/overview/Overview'
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Topbar />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/overview">
+          <Overview />
+        </Route>
+        <Route exact path="/charts">
+          <Charts />
         </Route>
       </Switch>
     </Router>
