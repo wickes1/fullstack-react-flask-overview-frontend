@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <div>
       <h1>This is the homepage</h1>
-
+      <h2>
+        Username: Admin <br />
+        Password: 123456
+      </h2>
       {/* <button onClick={() => actions.getBuildingOverview({ page: 1, per_page: 5 })}>
         Retreive Data
       </button>
