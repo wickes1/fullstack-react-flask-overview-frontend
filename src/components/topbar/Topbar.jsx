@@ -39,6 +39,7 @@ export const Topbar = () => {
                 <Button
                   variant="outline-primary"
                   onClick={() => {
+                    history.push('/')
                     actions.logout()
                   }}
                 >

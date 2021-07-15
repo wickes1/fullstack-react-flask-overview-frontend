@@ -9,9 +9,15 @@ export default function Home() {
   }, [])
   return (
     <div>
-      <button onClick={() => actions.getMetrics()}>Retreive Data</button>
-
-      <div>{store.data ? <pre>{JSON.stringify(store.data, null, 2)}</pre> : null}</div>
+      <h1>This is the homepage</h1>
+      <button onClick={() => actions.getBuildingOverview({ page: 1, per_page: 3 })}>
+        Retreive Data
+      </button>
+      <div>
+        {store.buildingOverview ? (
+          <pre>{JSON.stringify(store.buildingOverview, null, 2)}</pre>
+        ) : null}
+      </div>
     </div>
   )
 }

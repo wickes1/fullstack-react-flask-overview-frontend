@@ -5,18 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       username: '',
       message: null,
       data: null,
-      demo: [
-        {
-          title: 'FIRST',
-          background: 'white',
-          initial: 'white',
-        },
-        {
-          title: 'SECOND',
-          background: 'white',
-          initial: 'white',
-        },
-      ],
+      sqlQueryData: null,
+      buildingOverview: null,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -60,6 +50,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error('Login Error')
         }
       },
+      getBuildingOverview: body => {
+        const store = getStore()
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': store.token,
+          },
+          body: JSON.stringify(body),
+        }
+
+        fetch('/api/building_overview', options)
+          .then(res => res.json())
+          .then(data => {
+            setStore({ buildingOverview: data.res })
+          })
+          .catch(e => console.log(e))
+      },
+      getSQL: () => {
+        fetch('/api/sql_query', { method: 'GET' })
+          .then(res => res.json())
+          .then(data => {
+            setStore({ sqlQueryData: data.res })
+          })
+          .catch(e => console.log(e))
+      },
       getMetrics: () => {
         const store = getStore()
         const options = {
@@ -83,20 +99,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(data => setStore({ message: data.message }))
           .catch(error => console.log('Error loading message from backend', error))
       },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore()
+      // changeColor: (index, color) => {
+      //   //get the store
+      //   const store = getStore()
 
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color
-          return elm
-        })
+      //   //we have to loop the entire demo array to look for the respective index
+      //   //and change its color
+      //   const demo = store.demo.map((elm, i) => {
+      //     if (i === index) elm.background = color
+      //     return elm
+      //   })
 
-        //reset the global store
-        setStore({ demo: demo })
-      },
+      //   //reset the global store
+      //   setStore({ demo: demo })
+      // },
     },
   }
 }
