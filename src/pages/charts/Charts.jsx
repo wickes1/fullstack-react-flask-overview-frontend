@@ -7,7 +7,6 @@ export default function Charts() {
   const { store, actions } = useContext(Context)
   return (
     <div className="charts">
-      {/* <h1>Avg. EUI By Property Type</h1> */}
       <Chart
         title="Avg. EUI By Property Type"
         grid

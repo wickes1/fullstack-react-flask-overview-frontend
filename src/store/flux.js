@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       data: null,
       sqlQueryData: null,
       buildingOverview: null,
+      buildingPageSize: null,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -50,6 +51,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error('Login Error')
         }
       },
+      // page, per_page
+      // return res:buildings, page_size
       getBuildingOverview: body => {
         const store = getStore()
         const options = {
@@ -64,9 +67,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch('/api/building_overview', options)
           .then(res => res.json())
           .then(data => {
-            setStore({ buildingOverview: data.res })
+            setStore({ buildingOverview: data.res, buildingPageSize: data.page_size })
           })
           .catch(e => console.log(e))
+        console.log(store.buildingOverview)
       },
       getSQL: () => {
         fetch('/api/sql_query', { method: 'GET' })

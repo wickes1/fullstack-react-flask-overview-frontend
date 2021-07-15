@@ -1,59 +1,63 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Tab, Row, Col, ListGroup } from 'react-bootstrap'
+import BuildingTab from '../../components/buildingTab/BuildingTab'
 import { Context } from '../../store/appContext'
+import ReactPaginate from 'react-paginate'
 import './overview.css'
 
 export default function Overview() {
   const { store, actions } = useContext(Context)
-  console.log(store.buildingOverview)
-  const handleSelect = eventKey => {
-    switch (eventKey) {
-      case 0:
-        break
-      case 1:
-        break
-      case 2:
-        break
-
-      default:
-        break
-    }
+  const [pageNumber, setPageNumber] = useState(0)
+  const handleSelect = eventKey => {}
+  const changePage = ({ selected }) => {
+    setPageNumber(selected)
   }
-  return (
+  useEffect(() => {
+    actions.getBuildingOverview({ page: pageNumber + 1, per_page: 10 })
+    return () => {}
+  }, [pageNumber])
+  return store.buildingOverview ? (
     <div className="overview">
       <Tab.Container defaultActiveKey={0} onSelect={handleSelect}>
         <Row>
           <Col className="leftCard">
             <Tab.Content>
-              <Tab.Pane eventKey={0}>{store.buildingOverview.Address}</Tab.Pane>
-              <Tab.Pane eventKey={1}>{store.buildingOverview.Address}</Tab.Pane>
-              <Tab.Pane eventKey={2}>{store.buildingOverview.Address}</Tab.Pane>
-              <Tab.Pane eventKey={3}>{store.buildingOverview.Address}</Tab.Pane>
-              <Tab.Pane eventKey={4}>{store.buildingOverview.Address}</Tab.Pane>
+              {store.buildingOverview.map(building => {
+                return (
+                  <Tab.Pane action eventKey={building.OSEBuildingID}>
+                    <BuildingTab building={building} key={building.OSEBuildingID} />
+                  </Tab.Pane>
+                )
+              })}
             </Tab.Content>
           </Col>
 
           <Col className="rightCard">
             <ListGroup>
-              <ListGroup.Item action eventKey={0}>
-                Link 1
-              </ListGroup.Item>
-              <ListGroup.Item action eventKey={1}>
-                Link 2
-              </ListGroup.Item>
-              <ListGroup.Item action eventKey={2}>
-                Link 3
-              </ListGroup.Item>
-              <ListGroup.Item action eventKey={3}>
-                Link 4
-              </ListGroup.Item>
-              <ListGroup.Item action eventKey={4}>
-                Link 5
-              </ListGroup.Item>
+              {store.buildingOverview.map(building => {
+                return (
+                  <ListGroup.Item action eventKey={building.OSEBuildingID}>
+                    {building.PropertyName}
+                  </ListGroup.Item>
+                )
+              })}
+
+              <ReactPaginate
+                previousLabel="Previous"
+                nextLabel="Next"
+                pageCount={Math.ceil(store.buildingPageSize / 10)}
+                onPageChange={changePage}
+                initialPage={0}
+                containerClassName="paginationButtons"
+                previousLinkClassName="previousButton link"
+                nextLinkClassName="nextButton link"
+                disabledClassName="paginationDisabled"
+                activeClassName="paginationActive"
+              />
             </ListGroup>
           </Col>
         </Row>
       </Tab.Container>
     </div>
-  )
+  ) : null
 }
