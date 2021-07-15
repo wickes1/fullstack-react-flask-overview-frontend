@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <h1>This is the homepage</h1>
       <h2>
-        Username: Admin <br />
+        Username: admin <br />
         Password: 123456
       </h2>
       {/* <button onClick={() => actions.getBuildingOverview({ page: 1, per_page: 5 })}>
