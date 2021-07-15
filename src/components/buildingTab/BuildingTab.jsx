@@ -16,6 +16,12 @@ export default function BuildingTab({ building }) {
             <li>{'# of floor: ' + building.NumberofFloors}</li>
             <li>{'District: ' + building.CouncilDistrictCode}</li>
             <li>{'Built in ' + building.YearBuilt}</li>
+            <li>
+              <img
+                src={'https://picsum.photos/600/300/?random&' + Date.now()}
+                alt="lorem picture"
+              />
+            </li>
           </ul>
         </Card.Text>
       </Card>

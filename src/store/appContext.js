@@ -29,7 +29,7 @@ const injectContext = PassedComponent => {
       // state.actions.getMessage() // <---- calling this function from the flux.js actions
       state.actions.syncTokenFromSessionStorage()
       state.actions.getSQL()
-      state.actions.getBuildingOverview({ page: 1, per_page: 10 })
+      state.actions.getBuildingOverview({ page: 1, per_page: 15 })
     }, [])
 
     // The initial value for the context is not null anymore, but the current state of this component,

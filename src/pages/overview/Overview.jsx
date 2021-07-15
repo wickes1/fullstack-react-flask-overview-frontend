@@ -13,7 +13,7 @@ export default function Overview() {
     setPageNumber(selected)
   }
   useEffect(() => {
-    actions.getBuildingOverview({ page: pageNumber + 1, per_page: 10 })
+    actions.getBuildingOverview({ page: pageNumber + 1, per_page: 15 })
     return () => {}
   }, [pageNumber])
   return store.buildingOverview ? (
@@ -45,7 +45,7 @@ export default function Overview() {
               <ReactPaginate
                 previousLabel="Previous"
                 nextLabel="Next"
-                pageCount={Math.ceil(store.buildingPageSize / 10)}
+                pageCount={Math.ceil(store.buildingPageSize / 15)}
                 onPageChange={changePage}
                 initialPage={0}
                 containerClassName="paginationButtons"
