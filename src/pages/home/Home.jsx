@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
 import { Context } from '../../store/appContext'
+import './home.css'
 
 export default function Home() {
   const { store, actions } = useContext(Context)
   return (
-    <div>
-      <h1>This is the homepage</h1>
-      <h2>
+    <div className="home">
+      <h1 className="title">This is the homepage</h1>
+      <p className="body">
+        login for viewing the other tabs <br />
         Username: admin <br />
         Password: 123456
-      </h2>
+      </p>
       {/* <button onClick={() => actions.getBuildingOverview({ page: 1, per_page: 5 })}>
         Retreive Data
       </button>
